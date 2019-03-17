@@ -9,6 +9,19 @@ var restApi = require('./routes/restApi');
 
 var app = express();
 
+var mysql = require("mysql");
+//Database connection
+app.use(function(req, res, next){
+  res.locals.connection = mysql.createConnection({
+    host     : 'localhost',
+    user     : 'user',
+    password : 'pass',
+    database : 'avoinprojektidb'
+  });
+  res.locals.connection.connect();
+  next();
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
