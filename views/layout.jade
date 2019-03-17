@@ -13,33 +13,46 @@ html
           input(type="submit", value="search")
     .container
       .sidebar
-        h4  bobs adventure
+        h4  Book title
 
-        bookname= bookname
+          h4= data.bookName
+
+
+
         .picture
-          bookpic= bookpic
+          img(src= "./images/bookimage.jpg" alt="Image Title")
+
         .genre
           h5 Genres
-          bookgenres= bookgenres
+          -console.log(genres);
+          each val in genres
+            if val.tagDescription
+              a(href= "http://localhost:8081/v1/api/genre/"+val.genreName title= val.tagDescription)= val.genreName+ " "
+            else
+              a(href= "http://localhost:8081/v1/api/genre/"+val.genreName title= "No description")= val.genreName+ " "
+          -
         .tags
           h5 Tags
-          booktags= booktags
+          each val in tags
+            a= val.tagName+ " "
+
         .rating
           h5 Rating
-          bookrating= bookrating
+          each val in rating
+            h6= "Rating( "+ val +" / 5, 0 votes )"
         .language
           h5 Language
-          booklanguage= booklanguage
+          div= data.languageName
         .author
           h5 Author
-          bookauthor= bookauthor
+          div= data.authorName
         .chapters
-          h5 Chapters
-          bookchapters= bookchapters
+          h5 Book length
+          div= data.bookChapter_count + " Chapters"
       .main-content
         h4 Description
         .bookdescription
-          bookdescription= bookdescription
+          div= data.bookDescription
 
         block content
       .footer

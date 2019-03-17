@@ -6,8 +6,8 @@ html{
 }
 body {
   border-radius: 15px;
-  padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial;
+  padding: 10px;
+  font: 18px "Lucida Grande", Helvetica, Arial;
   color: #c5c6c7;
 }
 
@@ -47,11 +47,23 @@ body > .container{
   text-align: center;
 
 }
+.picture > img{
+  size: 200px;
+  height: 200px;
+}
 .sidebar{
   float: left;
   background-color: #1f2833;
   width: 30%;
   margin:0 2% 2% 0;
+  text-align: left;
+  padding-left: 10px;
+  padding-right: 0px;
+  padding-bottom: 10px;
+}
+.sidebar > *{
+  padding-bottom: 0px;
+  padding-top: 0px;
 }
 .main-content{
   float: left;
