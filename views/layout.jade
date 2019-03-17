@@ -1,0 +1,46 @@
+doctype html
+html
+  head
+    title= title
+    link(rel='stylesheet', href='/stylesheets/style.css')
+  body
+    header
+      .headerLeft left
+      .headerCenter The stuff is häär
+      .headerRight
+        form
+          input(type="text", name="search")
+          input(type="submit", value="search")
+    .container
+      .sidebar
+        h4  bobs adventure
+
+        bookname= bookname
+        .picture
+          bookpic= bookpic
+        .genre
+          h5 Genres
+          bookgenres= bookgenres
+        .tags
+          h5 Tags
+          booktags= booktags
+        .rating
+          h5 Rating
+          bookrating= bookrating
+        .language
+          h5 Language
+          booklanguage= booklanguage
+        .author
+          h5 Author
+          bookauthor= bookauthor
+        .chapters
+          h5 Chapters
+          bookchapters= bookchapters
+      .main-content
+        h4 Description
+        .bookdescription
+          bookdescription= bookdescription
+
+        block content
+      .footer
+        block footer
