@@ -1,0 +1,25 @@
+extends layout
+
+block content
+    .main-content(style="width: 100%")
+        table(style="width: 100%")
+            thead
+                tr
+                    th
+                    th
+                    th="Title"
+            tbody
+                -var i = 1
+                each val in books
+                    .tablebookrow
+                        td(style="text-align: center width=15%")
+                            span(style= "color:")= i
+                        td(style="width=15%")
+                            if val.bookPicture_url
+                                img(src= books.bookPicture_url alt= books.bookName style="size: 100%")
+                            else
+                                img(src= "./images/bookimage.jpg" alt= books.bookName style="size: 100%")
+                        td(style="width=70%")
+                            a(href= "/book/" + val.bookName title= val.bookName)= val.bookName
+                    -i++;
+

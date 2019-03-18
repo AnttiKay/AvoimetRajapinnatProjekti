@@ -60,6 +60,24 @@ router.get('/tags&genres', function(req, res, next) {
   });
 });
 
+router.get('/tag/:name', function(req, res, next) {
+  request(baseUrl+"/v1/api/tag/"+req.params.name, function (error, response, body) {
+    var bookdata = JSON.parse(body);
+
+    res.render('booklist',{books: bookdata.response})
+  });
+
+});
+
+router.get('/genre/:name', function(req, res, next) {
+  request(baseUrl+"/v1/api/genre/"+req.params.name, function (error, response, body) {
+    var bookdata = JSON.parse(body);
+
+    res.render('booklist',{books: bookdata.response})
+  });
+
+});
+
 function testlogger(error, response, body){
   console.log('error:', error); // Print the error if one occurred
   console.log('statusCode:', response && response.statusCode); // Print the response status code if a response was received

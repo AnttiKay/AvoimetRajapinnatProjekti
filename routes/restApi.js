@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 /* GET users listing. */
-router.get('/book/:name', function(req, res, next) {
+router.get('/book/:name', function(req, res, next) { // hakee kirjan tiedot kirjan nimellä
   var sql ="select books.bookName, books.bookDescription, books.bookPicture_url, books.bookChapter_count, language.languageName, authors.authorName\n" +
       "from books\n" +
       "\n" +
@@ -29,7 +29,7 @@ router.get('/book/:name', function(req, res, next) {
   });
 });
 
-router.get('/book/:name/genres', function(req, res, next) {
+router.get('/book/:name/genres', function(req, res, next) { // hakee kirjan genret
   var sql ="select genres.genreName\n" +
       "from genres\n" +
       "\tjoin books_genres\n" +
@@ -49,7 +49,7 @@ router.get('/book/:name/genres', function(req, res, next) {
     }
   });
 });
-router.get('/book/:name/tags', function(req, res, next) {
+router.get('/book/:name/tags', function(req, res, next) { //hakee kirjan tagit
   var sql ="select tags.tagName, tags.tagDescription\n" +
       "from tags\n" +
       "\tjoin tags_books\n" +
@@ -70,7 +70,7 @@ router.get('/book/:name/tags', function(req, res, next) {
     }
   });
 });
-router.get('/book/:name/rating', function(req, res, next) {
+router.get('/book/:name/rating', function(req, res, next) { // hakee kirjan ratinggin
   var sql ="select avg(rating)\n" +
       "from ratings\n" +
       "\tjoin books\n" +
