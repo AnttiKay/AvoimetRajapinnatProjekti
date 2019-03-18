@@ -13,10 +13,10 @@ block container
             h5 Genres
             -console.log(genres);
             each val in genres
-                if val.tagDescription
-                    a(href= "http://localhost:8081/v1/api/genre/"+val.genreName title= val.tagDescription)= val.genreName+ " "
+                if val.genreName
+                    a(href= "/genre/"+val.genreName title= val.tagDescription)= val.genreName+ " "
                 else
-                    a(href= "http://localhost:8081/v1/api/genre/"+val.genreName title= "No description")= val.genreName+ " "
+                    a(href= "/genre/"+val.genreName title= "No description")= val.genreName+ " "
             -
         .tags
             h5 Tags

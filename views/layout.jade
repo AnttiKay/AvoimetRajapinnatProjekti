@@ -5,8 +5,10 @@ html
     link(rel='stylesheet', href='/stylesheets/style.css')
   body
     header
-      .headerLeft left
-      .headerCenter The stuff is häär
+      .headerLeft
+        a(href="/")="Home"
+        a(href="/tags&genres")="Tags & Genres"
+      .headerCenter
       .headerRight
         form
           input(type="text", name="search")

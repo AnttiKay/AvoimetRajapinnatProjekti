@@ -28,12 +28,15 @@ header > div{
 }
 .headerLeft{
   width: 20%;
+  float:left;
 }
 .headerCenter{
   width: 50%;
+
 }
 .headerRight{
   width: 30%;
+  float:right;
 }
 .container{
   width: 100%;
@@ -70,8 +73,18 @@ body > .container{
   background-color: #1f2833;
   width: 65%;
   margin:0 2% 2% 0;
+  padding-bottom: 15px;
 }
 
+.headerLeft > *{
+  padding-right: 15px;
+}
+.genres > *{
+  padding-right: 10px;
+}
+.tags > *{
+  padding-right: 10px;
+}
 .footer{
 
 }
