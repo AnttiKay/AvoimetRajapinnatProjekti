@@ -1,0 +1,18 @@
+extends layout
+
+block content
+    .main-content(style="width: 100%")
+        .genres
+            h4= "Genres"
+            each val in genres
+                if val.genreName
+                    a(href= "/genre/" + val.genreName title= val.tagDescription)= val.genreName + " "
+                else
+                    a(href= "/genre/" + val.genreName title= "No description")= val.genreName + " "
+        .tags
+            h4= "Tags"
+            each val in tags
+                if val.tagName
+                    a(href= "/tag/" + val.tagName title= val.tagDescription)= val.tagName + " "
+                else
+                    a(href= "/tag/" + val.tagName title= "No description")= val.tagName + " "
