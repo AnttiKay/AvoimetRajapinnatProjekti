@@ -64,7 +64,7 @@ router.get('/tag/:name', function(req, res, next) {
   request(baseUrl+"/v1/api/tag/"+req.params.name, function (error, response, body) {
     var bookdata = JSON.parse(body);
 
-    res.render('booklist',{books: bookdata.response})
+    res.render('booklist',{books: bookdata.response, info: "Tag: "+req.params.name})
   });
 
 });
@@ -73,7 +73,7 @@ router.get('/genre/:name', function(req, res, next) {
   request(baseUrl+"/v1/api/genre/"+req.params.name, function (error, response, body) {
     var bookdata = JSON.parse(body);
 
-    res.render('booklist',{books: bookdata.response})
+    res.render('booklist',{books: bookdata.response, info:"Genre: "+req.params.name})
   });
 
 });

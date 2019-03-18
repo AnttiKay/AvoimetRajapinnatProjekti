@@ -2,6 +2,7 @@ extends layout
 
 block content
     .main-content(style="width: 100%")
+        h3= info
         table(style="width: 100%")
             thead
                 tr
@@ -18,7 +19,7 @@ block content
                             if val.bookPicture_url
                                 img(src= books.bookPicture_url alt= books.bookName style="size: 100%")
                             else
-                                img(src= "./images/bookimage.jpg" alt= books.bookName style="size: 100%")
+                                img(src= "images/bookimage.jpg" alt= books.bookName style="size: 100%")
                         td(style="width=70%")
                             a(href= "/book/" + val.bookName title= val.bookName)= val.bookName
                     -i++;
