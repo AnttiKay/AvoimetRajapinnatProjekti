@@ -31,7 +31,7 @@ router.get('/book/:name', function(req, res, next) {
           var ratingdata = JSON.parse(body);
           console.log(bookdata);
           console.log("before render");
-          res.render('index', { title: 'Books for everyone', data: bookdata, genres: bookgenres, tags: booktags, rating: ratingdata.response[0]});
+          res.render('bookinfo', { title: 'Welkome To BookApi', data: bookdata, genres: bookgenres, tags: booktags, rating: ratingdata.response[0]});
 
         });
 
@@ -40,6 +40,9 @@ router.get('/book/:name', function(req, res, next) {
 
     });
   });
+});
+router.get('/', function(req, res, next) {
+  res.render('index',{title: 'Welkome To BookApi'})
 });
 function testlogger(error, response, body){
   console.log('error:', error); // Print the error if one occurred
