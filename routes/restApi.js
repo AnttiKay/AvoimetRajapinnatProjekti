@@ -282,13 +282,13 @@ router.post('/addBook', function(req, res, next) {
             for (i = 0, len = genreIds[0].length; i < len; i++) {
               genresInsert[i] = [bookId[0].id, genreIds[0][i][0].id]
             }
-            console.log(genresInsert);
+            // console.log(genresInsert);
             // console.log(parsedTagsIds);
             for (i = 0, len = tagIds[0].length; i < len; i++) {
               tagsInsert[i] = [tagIds[0][i][0].id, bookId[0].id];
               // console.log(tagIds[0][i][0].id);
             }
-            console.log(tagsInsert);
+            // console.log(tagsInsert);
 
             sql = "insert into books_genres (Books_id, Genres_id)\n" +
                 "values ?"
@@ -361,8 +361,46 @@ router.post('/updateBook', function(req, res, next) {
 
 });
 
-router.post('/removeBook', function(req, res, next) {
+router.post('/deleteBook/:name', function(req, res, next) {
 
+    var sql ="select books.id\n" +
+        "from books\n" +
+        "where books.bookName like ?";
+
+    res.locals.connection.query(sql,req.params.name+"%", function (error, results, fields) {
+        var bookId = JSON.parse(JSON.stringify(results));
+        if (bookId > 1 || error){
+            res.send(JSON.stringify({"status": 500, "error": "Too many results", "response": "Book removing failure"}));
+            return req.exit;
+        }
+        // console.log(bookId[0].id);
+        sql = "delete books_authors, books_genres, tags_books\n" +
+            "from books_authors\n" +
+            "\tjoin books_genres\n" +
+            "\t\ton books_genres.Books_id = books_authors.Books_id\n" +
+            "\tjoin tags_books\n" +
+            "\t\ton tags_books.Books_id = books_authors.Books_id\n" +
+            "where books_authors.Books_id = ?" +
+
+        res.locals.connection.query(sql,bookId[0].id, function (error, results, fields) {
+            if (error){
+                res.send(JSON.stringify({"status": 500, "error": error, "response": "Book removing failure"}));
+                console.log("Error deleting book tags");
+                return req.exit;
+            }
+            sql = "delete books\n" +
+                "from books\n" +
+                "where books.id = ?;";
+            res.locals.connection.query(sql,bookId[0].id, function (error, results, fields) {
+                if (error){
+                    res.send(JSON.stringify({"status": 500, "error": error, "response": "Book removing failure"}));
+                    console.log("Error deleting book");
+                    return req.exit;
+                }
+            });
+        });
+
+    });
 });
 
 
