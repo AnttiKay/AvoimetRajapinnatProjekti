@@ -17,9 +17,9 @@ block content
                             span(style= "color:")= i
                         td(style="width=15%")
                             if val.bookPicture_url
-                                img(src= books.bookPicture_url alt= books.bookName style="size: 100%")
+                                img(src= books.bookPicture_url alt= books.bookName style="size: 100% ")
                             else
-                                img(src= "images/bookimage.jpg" alt= books.bookName style="size: 100%")
+                                img(src= "images/bookimage.jpg" alt= books.bookName style="size: 100% ")
                         td(style="width=70%")
                             a(href= "/book/" + val.bookName title= val.bookName)= val.bookName
                     -i++;

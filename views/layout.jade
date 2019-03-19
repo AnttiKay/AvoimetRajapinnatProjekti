@@ -8,11 +8,12 @@ html
       .headerLeft
         a(href="/")="Home"
         a(href="/tags&genres")="Tags & Genres"
+        a(href="/books")="All Books"
       .headerCenter
       .headerRight
-        form
-          input(type="text", name="search")
-          input(type="submit", value="search")
+        form(action="/search" method="post")
+          input(type="text", name="search" )
+          input(type="submit")
     .container
       block container
 

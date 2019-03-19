@@ -7,15 +7,15 @@ router.get('/book/:name', function(req, res, next) { // hakee kirjan tiedot kirj
       "from books\n" +
       "\n" +
       "\t\tjoin language\n" +
-      "\t\t\t\ton books.Language_id= language.id\n" +
-      "\t\t\t\t\t\t\t\t\n" +
+      "\t\t\t\ton books.Language_id= language.id\t\t\t\n" +
       "\t\tjoin books_authors\n" +
       "\t\t\t\ton books.id = books_authors.Books_id\n" +
       "\t\tjoin authors\n" +
       "\t\t\t\ton books_authors.Authors_id = authors.id\n" +
       "\t\t\t\t\n" +
       "\n" +
-      "where books.bookName like ?";
+      "where books.bookName like ?" +
+      "order by books.bookName asc";
   res.locals.connection.query(sql,req.params.name+"%", function (error, results, fields) {
     if (error) throw error;
 
@@ -23,6 +23,7 @@ router.get('/book/:name', function(req, res, next) { // hakee kirjan tiedot kirj
       res.send(JSON.stringify({"status": 500, "error": error, "response": null}));
       //If there is error, we send the error in the error section with 500 status
     } else {
+      // console.log(results);
       res.send(JSON.stringify({"status": 200, "error": null, "response": results}));
       //If there is no error, all is good and response is 200OK.
     }

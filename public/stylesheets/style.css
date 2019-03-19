@@ -27,11 +27,11 @@ header > div{
 
 }
 .headerLeft{
-  width: 20%;
+  width: 30%;
   float:left;
 }
 .headerCenter{
-  width: 50%;
+  width: 40%;
 
 }
 .headerRight{
@@ -53,6 +53,10 @@ body > .container{
 .picture > img{
   size: 200px;
   height: 200px;
+}
+td > img{
+  size: 75px;
+  height: 75px;
 }
 .sidebar{
   float: left;

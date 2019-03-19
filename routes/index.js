@@ -7,30 +7,30 @@ var baseUrl = "http://localhost:8081";
 router.get('/book/:name', function(req, res, next) {
   // var bname, bpic, bgenres, btags ,brating,blanguage, bauthor,bchapters,bdescription;
   request(baseUrl+"/v1/api/book/"+req.params.name, function (error, response, body) {
-    testlogger(error, response, body);
+    // testlogger(error, response, body);
 
     var data = JSON.parse(body);
     var bookdata = data.response[0];
     // console.log(bookdata);
 
     request(baseUrl+"/v1/api/book/"+req.params.name+"/genres", function (error, response, body) {
-      testlogger(error, response, body);
+      // testlogger(error, response, body);
 
       var genredata = JSON.parse(body);
       var bookgenres = genredata.response;
 
       request(baseUrl+"/v1/api/book/"+req.params.name+"/tags", function (error, response, body) {
-        testlogger(error, response, body);
+        // testlogger(error, response, body);
 
         var tagdata = JSON.parse(body);
         var booktags = tagdata.response;
 
         request(baseUrl+"/v1/api/book/"+req.params.name+"/rating", function (error, response, body) {
-          testlogger(error, response, body);
+          // testlogger(error, response, body);
 
           var ratingdata = JSON.parse(body);
-          console.log(bookdata);
-          console.log("before render");
+          // console.log(bookdata);
+          // console.log("before render");
           res.render('bookinfo', { title: 'Welcome To BookApi', data: bookdata, genres: bookgenres, tags: booktags, rating: ratingdata.response[0]});
 
         });
@@ -85,6 +85,36 @@ function testlogger(error, response, body){
 }
 router.get('/book/:bookid', function(req, res, next) {
   res.render('index', { title: 'Express' });
+});
+
+router.get('/books', function(req, res, next) {
+  request(baseUrl+"/v1/api/book/_", function (error, response, body) {
+    var bookdata = JSON.parse(body);
+    // console.log(bookdata);
+    // console.log(body);
+    //
+    // console.log(body.length);
+    res.render('booklist',{books: bookdata.response, info: "All books"})
+  });
+});
+
+router.post('/search', function(req, res, next) {
+  // console.log(req.body.search);
+  if((req.body.search) === ""){
+    // console.log("true");
+    return req.exit;
+  }
+    res.redirect("/searchResult/"+req.body.search);
+});
+
+router.get('/searchResult/:name', function(req, res, next) {
+  // console.log(req.params.name);
+
+  request(baseUrl+"/v1/api/book/"+req.params.name, function (error, response, body) {
+    var bookdata = JSON.parse(body);
+
+    res.render('booklist',{books: bookdata.response, info: "Search result with: "+req.params.name})
+  });
 });
 
 
