@@ -222,22 +222,25 @@ router.post('/addBook', function(req, res, next) {
     if(error){
       res.send(JSON.stringify({"status": 500, "error": error, "response": "Book adding failure"}));
       //If there is error, we send the error in the error section with 500 status
-      return
+
+
     }
     var languageId = JSON.parse(JSON.stringify(results));
-    console.log(languageId);
-    console.log(languageId[0]);
-    console.log(languageId[0].id);
+    // console.log(languageId);
+    // console.log(languageId[0]);
+    // console.log(languageId[0].id);
     sql = "Insert into books (bookName,bookDescription,bookPicture_url,bookChapter_count,Language_id)\n" +
         "values ?";
     var bookData= [[req.body.bookName,req.body.bookDescription,req.body.bookPicture_url,req.body.bookChapter_count, languageId[0].id]];
 
     res.locals.connection.query(sql,[bookData], function (error, results, fields) {
       //hakee genreille idt
-      if (error) throw error;
+
       if(error){
+          console.log("ERROR Adding book");
         res.send(JSON.stringify({"status": 500, "error": error, "response": "Book adding failure"}));
         //If there is error, we send the error in the error section with 500 status
+          return req.exit;
       }
 
       sql= "select genres.id\n" +
