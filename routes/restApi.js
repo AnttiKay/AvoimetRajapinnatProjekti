@@ -380,7 +380,7 @@ router.post('/deleteBook/:name', function(req, res, next) {
             "\t\ton books_genres.Books_id = books_authors.Books_id\n" +
             "\tjoin tags_books\n" +
             "\t\ton tags_books.Books_id = books_authors.Books_id\n" +
-            "where books_authors.Books_id = ?" +
+            "where books_authors.Books_id = ?";
 
         res.locals.connection.query(sql,bookId[0].id, function (error, results, fields) {
             if (error){
@@ -396,6 +396,8 @@ router.post('/deleteBook/:name', function(req, res, next) {
                     res.send(JSON.stringify({"status": 500, "error": error, "response": "Book removing failure"}));
                     console.log("Error deleting book");
                     return req.exit;
+                }else{
+                  res.send(JSON.stringify({"status": 200, "error": null, "response": "Book removing success"}));
                 }
             });
         });
